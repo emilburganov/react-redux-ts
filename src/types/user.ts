@@ -1,5 +1,7 @@
+import {IUser} from "../models/IUser";
+
 export interface UserState {
-    users: unknown[];
+    users: IUser[];
     loading: boolean;
     error: null | string;
 }
@@ -16,7 +18,7 @@ interface FetchUsersAction {
 
 interface FetchUsersSuccessAction {
     type: UserActionTypes.FETCH_USERS_SUCCESS;
-    payload: unknown[];
+    payload: IUser[];
 }
 
 interface FetchUsersErrorAction {

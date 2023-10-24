@@ -1,26 +1,27 @@
 import axios from "axios";
+import {Dispatch} from "react";
 import {TodoAction, TodoActionTypes} from "../../types/todo";
 
 export const fetchTodos = (page = 1, limit = 10) => {
-    return async (dispatch) => {
+    return async (dispatch: Dispatch<TodoAction>) => {
         try {
-            dispatch({type: TodoActionTypes.FETCH_TODO})
-            const response = await axios.get('https://jsonplaceholder.typicode.com/todos', {
+            dispatch({type: TodoActionTypes.FETCH_TODO});
+            const response = await axios.get("https://jsonplaceholder.typicode.com/todos", {
                 params: {
                     _page: page,
-                    _limit: limit
-                }
+                    _limit: limit,
+                },
             });
-            dispatch({type: TodoActionTypes.FETCH_TODO_SUCCESS, payload: response.data})
+            dispatch({type: TodoActionTypes.FETCH_TODO_SUCCESS, payload: response.data});
         } catch {
             dispatch({
                 type: TodoActionTypes.FETCH_TODO_ERROR,
-                payload: 'An error occurred while loading data!'
-            })
+                payload: "An error occurred while loading data!",
+            });
         }
-    }
-}
+    };
+};
 
 export const setTodosPage = (page: number): TodoAction => {
-    return {type: TodoActionTypes.SET_TODO_PAGE, payload: page}
-}
+    return {type: TodoActionTypes.SET_TODO_PAGE, payload: page};
+};
